@@ -1,10 +1,12 @@
-var myArg = process.argv.slice(2);
+var myArg = process.argv.slice(2); // collect the repoOwner and repoName
 var repoOwner = myArg[0];
 var repoName = myArg[1];
-var request = require('request');
+var request = require('request');  // modules required
 var token = require('./secrets.js');
 var fs = require('fs');
 
+
+// main function process the api and convert Json data.
 console.log('Welcome to the GitHub Avatar Downloader!');
 
 function getRepoContributors(repoOwner, repoName, cb) {
@@ -23,7 +25,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
 	});
 }
 
-
+// function to download images and write them
 function downloadImageByUrl(url, filePath){
 	request.get(url)
 		.on('error', function (err) {
@@ -35,7 +37,7 @@ function downloadImageByUrl(url, filePath){
 		.pipe(fs.createWriteStream(filePath));
 }
 
-
+// callback for saving the images
 getRepoContributors(repoOwner, repoName, function(err, result) {
 	if(repoOwner === undefined || repoName === undefined){
 		console.log ('PLease enter both Repo Owner and Repo Name');
