@@ -44,7 +44,7 @@ getRepoContributors(repoOwner, repoName, function(err, result) {
 	}else{
 		result.forEach((item)=>{
 			var url = item.avatar_url ;
-			var filePath = `img/(${item.login}-${repoName}).jpg`;
+			var filePath = `avatars/(${item.login}-${repoName}).jpg`;
 			downloadImageByUrl(url,filePath);
 		});
 	}
